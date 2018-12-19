@@ -1,4 +1,5 @@
 const express = require('express');
+const methodOverride = require('method-override');
 const app = express();
 var exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
@@ -7,6 +8,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/rotten-potatoes-take-2');
 app.engine('handlebars', exphbs({ defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
+app.use(methodOverride('_method'));
 
 const Post = mongoose.model('Post', {
     title: String,
@@ -47,6 +49,24 @@ app.post('/posts', (req, res) => {
     }).catch((err) => {
         console.log(err.message);
     });
+});
+
+
+app.get('/posts/:id/edit', (req, res) => {
+    Post.findById(req.params.id, function(err, post) {
+        res.render('posts-edit', { post: post });
+    });
+});
+
+
+app.put('/posts/:id', (req, res) => {
+    Post.findByIdAndUpdate(req.params.id, req.body)
+        .then(post => {
+            res.redirect(`/posts/${post._id}`)
+        })
+        .catch(err => {
+            console.log(err.message)
+        })
 });
 
 

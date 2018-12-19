@@ -1,0 +1,20 @@
+<fieldset>
+ <legend>Edit post</legend>
+ <!-- TITLE -->
+ <p>
+   <label for="post-title">Title</label><br>
+   <input id="post-title" type="text" name="title" value="{{post.title}}"/>
+ </p>
+
+ <!-- show TITLE -->
+ <p>
+   <label for="show-title">show Title</label><br>
+   <input id="show-title" type="text" name="showTitle" value="{{post.showTitle}}" />
+ </p>
+
+ <!-- DESCRIPTION -->
+ <p>
+   <label for="post-description">Description</label><br>
+   <textarea id="post-description" name="description" rows="10" />{{post.description}}</textarea>
+ </p>
+</fieldset>
