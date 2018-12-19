@@ -70,6 +70,16 @@ app.put('/posts/:id', (req, res) => {
 });
 
 
+app.delete('/posts/:id', function (req, res) {
+    console.log("DELETE post")
+    Post.findByIdAndRemove(req.params.id).then((review) => {
+        res.redirect('/');
+    }).catch((err) => {
+        console.log(err.message);
+    })
+});
+
+
 app.listen(3000, () => {
     console.log('App listening on port 3000 :)')
 });

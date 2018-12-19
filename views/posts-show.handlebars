@@ -5,3 +5,7 @@
 <p>{{post.description}}</p>
 
 <p><a href="/posts/{{post._id}}/edit">Edit</a></p>
+
+<p><form method="POST" action="/posts/{{post._id}}?_method=DELETE">
+    <button type="submit">Delete</button>
+</form></p>
